@@ -1,27 +1,27 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
-  ManyToOne,
 } from 'typeorm';
-import { User } from './user.entity';
+import { Todo } from './todo.entity';
 
 @Entity()
-export class Todo {
+export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  title: string;
+  @Column({ unique: true })
+  username: string;
 
   @Column()
-  content: string;
+  password: string;
 
-  @ManyToOne(() => User, (user) => user.todos)
-  user: User;
+  @OneToMany(() => Todo, (todo) => todo.user)
+  todos: Todo[];
 
   @CreateDateColumn()
   createdAt: Date;

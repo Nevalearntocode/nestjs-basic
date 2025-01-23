@@ -6,6 +6,9 @@ import { TodoService } from './todo/todo.service';
 import { TodoController } from './todo/todo.controller';
 import { Todo } from './entities/todo.entity';
 import { ConfigModule } from '@nestjs/config';
+import { UserService } from './user/user.service';
+import { UserController } from './user/user.controller';
+import { User } from './entities/user.entity';
 
 @Module({
   imports: [
@@ -22,9 +25,9 @@ import { ConfigModule } from '@nestjs/config';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // Set to false in production
     }),
-    TypeOrmModule.forFeature([Todo]),
+    TypeOrmModule.forFeature([Todo, User]),
   ],
-  controllers: [AppController, TodoController],
-  providers: [AppService, TodoService],
+  controllers: [AppController, TodoController, UserController],
+  providers: [AppService, TodoService, UserService],
 })
 export class AppModule {}
